@@ -1,5 +1,5 @@
 import bodyParser from "body-parser";
-import express, { Request, Response } from "express";
+import express from "express";
 import { REGISTRY_PORT } from "../config";
 
 export type Node = { nodeId: number; pubKey: string };
@@ -18,8 +18,10 @@ export async function launchRegistry() {
   _registry.use(express.json());
   _registry.use(bodyParser.json());
 
-  // TODO implement the status route
-  // _registry.get("/status", (req, res) => {});
+  // Implement the status route
+  _registry.get("/status", (req, res) => {
+    res.send("live");
+  });
 
   const server = _registry.listen(REGISTRY_PORT, () => {
     console.log(`registry is listening on port ${REGISTRY_PORT}`);
