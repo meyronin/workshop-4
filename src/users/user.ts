@@ -20,6 +20,11 @@ export async function user(userId: number) {
   _user.use(express.json());
   _user.use(bodyParser.json());
 
+   // Implement the status route
+   _user.get("/status", (req, res) => {
+    res.send("live");
+  });
+
   // Function to register the node on the registry
   async function registerNode() {
     const { publicKey, privateKey } = await generateRsaKeyPair();
@@ -39,10 +44,7 @@ export async function user(userId: number) {
   // Call the registerNode function to register the node on startup
   registerNode();
 
-  // Implement the status route
-  _user.get("/status", (req, res) => {
-    res.send("live");
-  });
+ 
 
   // POST route to receive messages
   _user.post("/message", (req: Request, res: Response) => {
