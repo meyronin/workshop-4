@@ -5,6 +5,15 @@ import { generateRsaKeyPair, exportPrvKey } from "../crypto"; // Importing crypt
 
 export type Node = { nodeId: number; pubKey: string; prvKey: string | null }; // Update the Node type to include prvKey
 
+export type RegisterNodeBody = {
+  nodeId: number;
+  pubKey: string;
+};
+
+export type GetNodeRegistryBody = {
+  nodes: Node[];
+};
+
 let registeredNodes: Node[] = [];
 
 export async function launchRegistry(): Promise<any> {
