@@ -4,6 +4,7 @@ import {
   BASE_USER_PORT,
   REGISTRY_PORT,
 } from "../../src/config";
+import crypto from "crypto";
 import { launchNetwork } from "../../src/index";
 import { GetNodeRegistryBody } from "../../src/registry/registry";
 import {
@@ -390,9 +391,7 @@ describe("Onion Routing", () => {
       });
 
       it("After receiving a message, a user's /getLastReceivedMessage route returns the right message", async () => {
-        const randomNumber = crypto
-          .getRandomValues(new Uint32Array(1))[0]
-          .toString();
+        const randomNumber = crypto.getRandomValues(new Uint32Array(1))[0].toString();
 
         const randomMessage = `Hello user, my favourite number is ${randomNumber}`;
 
